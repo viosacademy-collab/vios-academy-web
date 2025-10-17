@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIOS ACADEMY - Potencia tu Propósito (Futurista)</title>
+    
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Paleta Futurista: Dark (#0A0A1F), Primary (#FF6600 - Naranja Neón), Secondary (#00FFFF - Cian Neón) */
+        :root {
+            --color-primary: #FF6600; /* Naranja Neón */
+            --color-secondary: #00FFFF; /* Cian Neón */
+            --color-dark-bg: #0A0A1F; /* Fondo Oscuro Profundo */
+            --color-card-bg: #1A1A30; /* Fondo de Tarjeta ligeramente más claro */
+            --color-text-light: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-dark-bg);
+            color: var(--color-text-light);
+            transition: background-color 0.5s;
+        }
+
+        /* Estilos de color para uso en Tailwind */
+        .bg-dark-bg { background-color: var(--color-dark-bg); }
+        .bg-card { background-color: var(--color-card-bg); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .border-primary { border-color: var(--color-primary); }
+        .border-secondary { border-color: var(--color-secondary); }
+
+        /* Efecto de Neumorfismo Oscuro / Neon Glow */
+        .neon-card {
+            box-shadow: 
+                0 0 10px rgba(255, 102, 0, 0.4), /* Primary glow */
+                0 0 20px rgba(255, 102, 0, 0.2), 
+                inset 0 0 5px rgba(255, 102, 0, 0.5); /* Inner glow */
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .neon-card:hover {
+            box-shadow: 
+                0 0 15px var(--color-secondary), /* Secondary glow on hover */
+                0 0 30px rgba(0, 255, 255, 0.3), 
+                inset 0 0 8px rgba(0, 255, 255, 0.6);
+            transform: translateY(-3px);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+        }
+
+        /* Botón con efecto Neón */
+        .btn-neon {
+            background-color: var(--color-primary);
+            color: var(--color-dark-bg);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-neon:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-dark-bg);
+            box-shadow: 0 0 15px var(--color-secondary), 0 0 25px var(--color-secondary);
+            transform: scale(1.05);
+        }
+
+        /* Estilo para el logo en la barra de navegación */
+        .logo-nav {
+            height: 45px; 
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255, 102, 0, 0.8));
+        }
+
+        /* Estilo para el logo en la sección Hero */
+        .hero-logo {
+            width: 280px;
+            height: auto;
+            filter: drop-shadow(0 0 15px var(--color-primary));
+        }
+        @media (min-width: 768px) {
+            .hero-logo {
+                width: 400px; 
+            }
+        }
+        
+        /* Líneas de separación geométricas */
+        .geometric-divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            margin: 0 auto;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg">
+
+    <!-- Header / Barra de Navegación -->
+    <header class="bg-card shadow-xl sticky top-0 z-50 border-b border-primary/30">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            
+            <a href="#inicio" class="flex items-center">
+                <!-- LOGO PEQUEÑO - RUTA ACTUALIZADA A PNG -->
+                <img src="./images/logo.png" alt="VIOS ACADEMY Logo" class="logo-nav">
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 font-medium text-lg">
+                <a href="#proposito" class="text-gray-300 hover:text-primary transition duration-300">Propósito</a>
+                <a href="#pilares" class="text-gray-300 hover:text-primary transition duration-300">Pilares</a>
+                <a href="#areas" class="text-gray-300 hover:text-primary transition duration-300">Expertise</a>
+                <a href="#equipo" class="text-gray-300 hover:text-secondary transition duration-300">Equipo</a>
+                <a href="#contacto" class="btn-neon px-5 py-2 rounded-lg text-sm">
+                    Acceso al Sistema
+                </a>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden text-primary focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-card border-t border-primary/30 shadow-2xl">
+            <a href="#proposito" class="block py-3 px-6 hover:bg-dark-bg transition duration-300 border-b border-gray-700">Propósito</a>
+            <a href="#pilares" class="block py-3 px-6 hover:bg-dark-bg transition duration-300 border-b border-gray-700">Pilares</a>
+            <a href="#areas" class="block py-3 px-6 hover:bg-dark-bg transition duration-300 border-b border-gray-700">Expertise</a>
+            <a href="#equipo" class="block py-3 px-6 hover:bg-dark-bg transition duration-300 border-b border-gray-700">Equipo</a>
+            <a href="#contacto" class="block py-3 px-6 bg-primary text-dark-bg font-bold hover:bg-secondary transition duration-300">Acceso al Sistema</a>
+        </div>
+    </header>
+
+    <!-- Sección HERO -->
+    <section id="inicio" class="min-h-screen flex items-center text-white py-20 relative overflow-hidden">
+        <!-- Efecto de patrón futurista de fondo (opcional) -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <!-- Simulación de fondo de circuito -->
+            <svg width="100%" height="100%">
+                <defs>
+                    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                        <path d="M 80 0 L 0 0 0 80" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" class="text-gray-700/50" />
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 text-center z-10">
+            <!-- Logo Naranja Neón en el centro - RUTA ACTUALIZADA A PNG -->
+            <img src="./images/logo.png" alt="VIOS ACADEMY Logo Principal" class="hero-logo mx-auto">
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-snug mb-4">
+                POTENCIA TU <span class="text-primary border-b-2 border-primary pb-1">PROPÓSITO</span>
+            </h1>
+            <p class="text-xl md:text-3xl mb-10 font-light max-w-4xl mx-auto text-secondary">
+                "Transfórmate en el líder ético y tecnológico que el mañana necesita."
+            </p>
+            <a href="#pilares" class="btn-neon inline-block px-12 py-4 rounded-full shadow-lg transform">
+                Ver Manifiesto VIOS
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección Propósito Trascendental (Misión/Visión) -->
+    <section id="proposito" class="py-20 bg-dark-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-secondary mb-4">Misión y Visión: Nuestro Protocolo de Existencia</h2>
+            <div class="geometric-divider bg-primary mx-auto"></div>
+
+            <div class="grid md:grid-cols-2 gap-12 mt-10">
+                
+                <div class="p-8 neon-card bg-card rounded-2xl">
+                    <h3 class="text-3xl font-extrabold mb-4 text-primary border-b border-primary/50 pb-2">Misión: Activación</h3>
+                    <p class="text-lg text-gray-300 italic">
+                        Activar el potencial humano, tecnológico y ético de individuos y organizaciones, transformando el conocimiento de vanguardia en habilidades prácticas y conciencia trascendente.
+                    </p>
+                    <p class="mt-4 text-md text-gray-400">
+                        Cerramos la brecha entre la innovación y su aplicación ética para el bienestar integral, no solo el avance técnico.
+                    </p>
+                </div>
+
+                <div class="p-8 neon-card bg-card rounded-2xl border-secondary">
+                    <h3 class="text-3xl font-extrabold mb-4 text-secondary border-b border-secondary/50 pb-2">Visión: Trascendencia</h3>
+                    <p class="text-lg text-gray-300 italic">
+                        Ser la fuente de conocimiento de mayor impacto global, elevando la capacidad de discernimiento y acción de las personas.
+                    </p>
+                    <p class="mt-4 text-md text-gray-400">
+                        Forjamos líderes que utilizan la tecnología y la ingeniería para construir una sociedad más libre, justa y consciente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección Pilares -->
+    <section id="pilares" class="py-20 bg-dark-bg border-t border-b border-gray-700/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-primary mb-4">Los 5 Protocolos Fundamentales</h2>
+            <p class="text-xl text-center text-gray-400 mb-12">Nuestros pilares para forjar al ser humano del futuro.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- PILAR 1 -->
+                <div class="neon-card p-6 bg-card rounded-xl lg:col-span-1 border-l-4 border-primary">
+                    <div class="text-primary text-4xl mb-3 font-extrabold">01</div>
+                    <h3 class="text-xl font-bold mb-2 text-secondary">Conciencia Digital</h3>
+                    <p class="text-gray-400 text-sm">Dominio funcional y visión crítica para integrar la tecnología éticamente.</p>
+                </div>
+                
+                <!-- PILAR 2 -->
+                <div class="neon-card p-6 bg-card rounded-xl lg:col-span-1 border-l-4 border-primary">
+                    <div class="text-primary text-4xl mb-3 font-extrabold">02</div>
+                    <h3 class="text-xl font-bold mb-2 text-secondary">Responsabilidad Social</h3>
+                    <p class="text-gray-400 text-sm">Democratización de conocimiento a comunidades vulnerables.</p>
+                </div>
+
+                <!-- PILAR 3 -->
+                <div class="neon-card p-6 bg-card rounded-xl lg:col-span-1 border-l-4 border-primary">
+                    <div class="text-primary text-4xl mb-3 font-extrabold">03</div>
+                    <h3 class="text-xl font-bold mb-2 text-secondary">Capacitación Técnica</h3>
+                    <p class="text-gray-400 text-sm">Expertise avanzado en tecnologías de punta y la ingeniería matriz VIOS.</p>
+                </div>
+
+                <!-- PILAR 4 -->
+                <div class="neon-card p-6 bg-card rounded-xl lg:col-span-1 border-l-4 border-primary">
+                    <div class="text-primary text-4xl mb-3 font-extrabold">04</div>
+                    <h3 class="text-xl font-bold mb-2 text-secondary">Liderazgo Ético</h3>
+                    <p class="text-gray-400 text-sm">Entrenamiento en pensamiento crítico y discernimiento tecnológico.</p>
+                </div>
+
+                <!-- PILAR 5 -->
+                <div class="neon-card p-6 bg-card rounded-xl lg:col-span-1 border-l-4 border-primary">
+                    <div class="text-primary text-4xl mb-3 font-extrabold">05</div>
+                    <h3 class="text-xl font-bold mb-2 text-secondary">Bienestar & Propósito</h3>
+                    <p class="text-gray-400 text-sm">Alinear el trabajo técnico con el bienestar personal y combatir el *burnout*.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Áreas de Expertise Técnico -->
+    <section id="areas" class="py-20 bg-dark-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-secondary mb-4">Sectores de Inmersión Técnica</h2>
+            <div class="geometric-divider bg-secondary mx-auto"></div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+                
+                <div class="p-6 bg-card rounded-xl neon-card border-t-8 border-secondary">
+                    <div class="text-secondary text-5xl mb-4 font-bold">🧠</div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary">Inteligencia Artificial</h3>
+                    <p class="text-gray-400 text-sm">IA Generativa, Bots de Telegram, Automatización Robótica de Procesos (RPA).</p>
+                </div>
+                
+                <div class="p-6 bg-card rounded-xl neon-card border-t-8 border-secondary">
+                    <div class="text-secondary text-5xl mb-4 font-bold">➗</div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary">Ciencias Básicas</h3>
+                    <p class="text-gray-400 text-sm">Física y Matemáticas avanzadas aplicadas a la ingeniería moderna.</p>
+                </div>
+
+                <div class="p-6 bg-card rounded-xl neon-card border-t-8 border-secondary">
+                    <div class="text-secondary text-5xl mb-4 font-bold">⚙️</div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary">Electrónica & Control</h3>
+                    <p class="text-gray-400 text-sm">Mecatrónica, Diseño de Sistemas embebidos, Automatización Industrial.</p>
+                </div>
+
+                <div class="p-6 bg-card rounded-xl neon-card border-t-8 border-secondary">
+                    <div class="text-secondary text-5xl mb-4 font-bold">🛠️</div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary">Ingeniería Automotriz</h3>
+                    <p class="text-gray-400 text-sm">Autotrónica, Mototrónica, Sistemas de Diagnóstico Avanzado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Equipo de Instructores y Liderazgo -->
+    <section id="equipo" class="py-20 bg-card border-t border-primary/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-primary mb-4">El Motor de VIOS: Nuestros Instructores</h2>
+            <p class="text-xl text-center text-gray-400 mb-12">Expertos con experiencia práctica y un compromiso ético con tu formación.</p>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Imagen de los Instructores - RUTA ACTUALIZADA A PNG -->
+                <div class="order-2 lg:order-1">
+                    <img src="./images/team.png" alt="Equipo de instructores de VIOS ACADEMY con chalecos naranjas" class="rounded-2xl shadow-2xl object-cover w-full h-96 transform hover:scale-[1.01] transition duration-500 border-4 border-secondary/50" style="object-position: center top;">
+                    <blockquote class="mt-4 text-center text-lg italic text-gray-500 border-t border-gray-700 pt-3">
+                        "La Conciencia y la Técnica, Juntas al Servicio de la Vida..."
+                    </blockquote>
+                </div>
+                
+                <!-- Descripción del Liderazgo -->
+                <div class="order-1 lg:order-2 space-y-6">
+                    <h3 class="text-3xl font-extrabold text-secondary mb-4">Liderazgo Impulsado por la Ética</h3>
+                    <p class="text-gray-300 text-lg">
+                        En VIOS ACADEMY, nuestros instructores no son solo técnicos; son **mentores éticos** comprometidos con la enseñanza de la tecnología como herramienta para el bien social. Cada miembro del equipo encarna los cinco pilares de nuestra academia.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4 border-t border-gray-700">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-primary text-2xl font-bold">✔️</span>
+                            <p class="text-gray-400"><strong class="text-white">Experiencia Verificada:</strong> Profesionales activos en la industria de la ingeniería y desarrollo de software.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-primary text-2xl font-bold">✔️</span>
+                            <p class="text-gray-400"><strong class="text-white">Metodología VIOS:</strong> Enfocados en la aplicación práctica y la toma de decisiones consciente.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="text-primary text-2xl font-bold">✔️</span>
+                            <p class="text-gray-400"><strong class="text-white">Compromiso Social:</strong> Participación activa en programas de democratización del conocimiento.</p>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="btn-neon inline-block mt-4 px-8 py-3 rounded-lg text-sm bg-secondary text-dark-bg">
+                        Conoce a Nuestro Staff
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Inclusión Digital (Tercera Edad) -->
+    <section id="tercera-edad" class="py-20 bg-dark-bg border-t border-secondary/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-secondary mb-4">Inclusión 3.0: Programa para la Tercera Edad</h2>
+            <p class="text-xl text-center text-gray-400 mb-12">Cerrando la brecha digital con un enfoque ético y de bienestar.</p>
+            
+            <div class="grid lg:grid-cols-3 gap-10 items-center bg-card p-8 rounded-2xl neon-card">
+                
+                <!-- Imagen para Inclusión - RUTA ACTUALIZADA A PNG -->
+                <div class="lg:col-span-1 order-2 lg:order-1">
+                    <img src="./images/inclusion.png" alt="Asistente robótico para la inclusión digital" class="rounded-xl shadow-xl object-cover w-full h-80 border-2 border-primary/50" style="object-position: center top;">
+                    <p class="mt-3 text-center text-sm text-gray-500">Formación adaptada y segura con la asistencia de IA.</p>
+                </div>
+                
+                <!-- Contenido detallado del programa -->
+                <div class="lg:col-span-2 order-1 lg:order-2 space-y-5">
+                    
+                    <div class="p-4 bg-dark-bg rounded-lg border-l-4 border-primary shadow-inner">
+                        <h4 class="font-bold text-xl text-primary mb-1">Empoderamiento Digital y Ciberseguridad</h4>
+                        <ul class="list-disc list-inside text-gray-400 ml-4 text-md space-y-1">
+                            <li>Uso seguro e inteligente del smartphone, prevención de *phishing*.</li>
+                            <li>Redes sociales, videollamadas y comunicación familiar.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-dark-bg rounded-lg border-l-4 border-secondary shadow-inner">
+                        <h4 class="font-bold text-xl text-secondary mb-1">Bienestar y Propósito en la Era Digital</h4>
+                        <ul class="list-disc list-inside text-gray-400 ml-4 text-md space-y-1">
+                            <li>Apps de salud, telemedicina y hobbies digitales.</li>
+                            <li>Introducción amigable al hogar inteligente (Domótica).</li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" class="btn-neon inline-block mt-4 px-8 py-3 rounded-lg text-sm">
+                        Inscribir a un Familiar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sección Contacto / Acceso -->
+    <section id="contacto" class="py-20 bg-dark-bg border-t border-primary/50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-primary">Sistema de Conexión Segura</h2>
+            <p class="text-xl mb-12 font-light max-w-2xl mx-auto text-gray-400">
+                Establece un enlace con nuestra central de datos para iniciar tu proceso de inscripción o solicitar información.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-dark-bg">
+                
+                <!-- Email -->
+                <div class="bg-card p-6 rounded-xl neon-card flex flex-col items-center justify-center">
+                    <svg class="w-10 h-10 text-secondary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-17 0V5a2 2 0 012-2h14a2 2 0 012 2v3m-17 0h14"></path></svg>
+                    <h4 class="font-bold text-xl text-primary">Enlace de Datos</h4>
+                    <p class="text-gray-400 break-all text-sm">viosacademy@gmail.com</p>
+                    <a href="mailto:viosacademy@gmail.com" class="text-sm mt-3 text-secondary font-semibold hover:text-white transition duration-300 border-b border-secondary">Enviar Protocolo</a>
+                </div>
+
+                <!-- Teléfono (Actualizado con enlaces de WhatsApp) -->
+                <div class="bg-card p-6 rounded-xl neon-card flex flex-col items-center justify-center">
+                    <svg class="w-10 h-10 text-secondary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-10a2 2 0 01-2-2v-5z"></path></svg>
+                    <h4 class="font-bold text-xl text-primary">Líneas de Soporte</h4>
+                    
+                    <a href="https://wa.me/584122719964" target="_blank" class="text-gray-300 font-mono text-sm hover:text-secondary transition duration-300 border-b border-transparent hover:border-secondary mb-1">
+                        +58 412 2719964
+                    </a>
+                    
+                    <a href="https://wa.me/584148817015" target="_blank" class="text-gray-300 font-mono text-sm hover:text-secondary transition duration-300 border-b border-transparent hover:border-secondary mb-1">
+                        +58 414 8817015
+                    </a>
+                    
+                    <a href="https://wa.me/584241399862" target="_blank" class="text-gray-300 font-mono text-sm hover:text-secondary transition duration-300 border-b border-transparent hover:border-secondary">
+                        +58 424 1399862
+                    </a>
+
+                </div>
+
+                <!-- Call to Action Final - Botón de Google Form actualizado -->
+                <div class="bg-primary p-6 rounded-xl neon-card flex flex-col items-center justify-center border-2 border-white/50">
+                    <svg class="w-10 h-10 text-dark-bg mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18s-3.332.477-4.5 1.253"></path></svg>
+                    <h4 class="font-bold text-xl text-dark-bg">Inscripción Activa</h4>
+                    <p class="text-dark-bg text-sm">Comienza tu transformación en la Matriz VIOS.</p>
+                    <!-- ENLACE ACTUALIZADO -->
+                    <a href="https://forms.gle/34Gh7aas2tPVJoLc7" target="_blank" class="mt-3 inline-block bg-dark-bg text-primary font-bold px-8 py-3 rounded-full hover:bg-gray-800 transition duration-300 shadow-xl">
+                        Acceder al Formulario
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-bg border-t border-primary/50 text-gray-500 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-2 text-primary font-bold">VIOS ACADEMY - [Código 001] Protocolo Operacional</p>
+            <p>&copy; 2025 VIOS ACADEMY. Todos los derechos reservados.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#proposito" class="hover:text-secondary transition duration-300">Manifiesto</a>
+                <span class="text-gray-700">|</span>
+                <a href="#equipo" class="hover:text-secondary transition duration-300">Staff</a>
+                <span class="text-gray-700">|</span>
+                <a href="#contacto" class="hover:text-secondary transition duration-300">Conexión</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de Menú Móvil -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const navLinks = menu.querySelectorAll('a');
+
+            // Toggle del menú
+            button.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Cerrar menú al hacer clic en un enlace (para dispositivos móviles)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
